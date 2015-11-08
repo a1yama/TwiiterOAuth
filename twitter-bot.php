@@ -7,9 +7,10 @@
     $connection = new TwitterOAuth(consumer_key, consumer_secret, access_token, access_token_secret);
 
     $connection->setTimeouts(60, 30);
-    $file_path = __DIR__ . '/image/1.jpg';
-    $result = $connection->upload('media/upload', array('media' => $file_path));
-    $parameters = array('status' => 'Hello World ' . time(), 'media_ids' => $result->media_id_string);
+    $apiReuestUrl = 'http://localhost:5555/twitter/api/post';
+    $json = file_get_contents($apiReuestUrl);
+    $arr = json_decode($json,true);
+
+    $result = $connection->upload('media/upload', array('media' => $arr['file_path'] ));
+    $parameters = array('status' => $arr['status'], 'media_ids' => $result->media_id_string);
     $result = $connection->post('statuses/update', $parameters);
-        
-    var_dump($result);
