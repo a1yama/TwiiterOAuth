@@ -7,10 +7,9 @@
     $connection = new TwitterOAuth(consumer_key, consumer_secret, access_token, access_token_secret);
 
     $connection->setTimeouts(60, 30);
-    $apiReuestUrl = 'http://localhost:5555/twitter/api/post';
+    $apiReuestUrl = api_url;
     $json = file_get_contents($apiReuestUrl);
     $arr = json_decode($json,true);
-
     $result = $connection->upload('media/upload', array('media' => $arr['file_path'] ));
     $parameters = array('status' => $arr['status'], 'media_ids' => $result->media_id_string);
     $result = $connection->post('statuses/update', $parameters);
