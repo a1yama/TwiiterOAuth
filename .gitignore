@@ -1,3 +1,5 @@
 config.php
 rocketeer.phar
 .rocketeer/
+data/
+.idea/
