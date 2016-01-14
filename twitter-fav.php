@@ -4,6 +4,7 @@ require_once('twitteroauth/autoload.php');
 require_once('twitteroauth/src/TwitterOAuth.php');
 require_once(dirname(__FILE__) . '/config.php');
 use Abraham\TwitterOAuth\TwitterOAuth;
+require 'vendor/autoload.php';
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
