@@ -10,7 +10,7 @@ use Monolog\Handler\StreamHandler;
 
 // logger
 $log = new Logger('logger');
-$log->pushHandler(new StreamHandler('logs/app_' . date('Ymd') . '.log', Logger::INFO));
+$log->pushHandler(new StreamHandler(__DIR__ . '/logs/app_' . date('Ymd') . '.log', Logger::INFO));
 
 $log->addInfo('batch start.');
 
