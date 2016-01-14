@@ -3,3 +3,4 @@ rocketeer.phar
 .rocketeer/
 data/
 .idea/
+logs/

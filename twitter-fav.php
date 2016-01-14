@@ -4,6 +4,14 @@ require_once('twitteroauth/autoload.php');
 require_once('twitteroauth/src/TwitterOAuth.php');
 require_once(dirname(__FILE__) . '/config.php');
 use Abraham\TwitterOAuth\TwitterOAuth;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
+// logger
+$log = new Logger('logger');
+$log->pushHandler(new StreamHandler('logs/app.log', Logger::DEBUG));
+
+$log->addInfo('batch start.');
 
 $connection = new TwitterOAuth(consumer_key, consumer_secret, access_token, access_token_secret);
 
@@ -41,16 +49,18 @@ foreach ( $keyword_list as $keyword ) {
 }
 
 if (isset($fav_list)) {
+    $fav = '';
     foreach ($fav_list as $value) {
         $statues = $connection->post("favorites/create", array(
             "id" => $value,
             "include_entities" => "false",
         ));
+        $fav .= ',' . $value;
+        $log->addInfo($value);
     }
+    file_put_contents($fileName, $fav, FILE_APPEND);
+} else {
+    $log->addInfo('no favorites');
 }
 
-$fav = '';
-foreach ($fav_list as $item) {
-    $fav .= ',' . $item;
-}
-file_put_contents($fileName, $fav, FILE_APPEND);
+$log->addInfo('batch end.');
