@@ -4,3 +4,4 @@ rocketeer.phar
 data/
 .idea/
 logs/
+vendor/

@@ -49,7 +49,7 @@ foreach ( $keyword_list as $keyword ) {
     }
 }
 
-if (isset($fav_list)) {
+if (isset($fav_list) && !empty($fav_list)) {
     $fav = '';
     foreach ($fav_list as $value) {
         $statues = $connection->post("favorites/create", array(
