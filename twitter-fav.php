@@ -57,6 +57,14 @@ if (isset($fav_list) && !empty($fav_list)) {
             "include_entities" => "false",
         ));
         $fav .= ',' . $value;
+
+        // Slack通知
+        $text = '$fav';
+//        https://twitter.com/status/$value
+        $text = urlencode($text);
+        $url = "https://slack.com/api/chat.postMessage?token=" . SLACK_API_KEY . "&channel=%23aniera_twitter_fav&text=" . $text;
+        file_get_contents($url);
+
         $log->addInfo($value);
     }
     file_put_contents($fileName, $fav, FILE_APPEND);
